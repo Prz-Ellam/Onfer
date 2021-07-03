@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxproj", "{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Onfer", "Onfer\Onfer.vcxproj", "{618E1388-D33B-4B6C-BA87-37FCDAB89DA8}"
 EndProject
 Global
@@ -21,6 +23,14 @@ Global
 		{618E1388-D33B-4B6C-BA87-37FCDAB89DA8}.Release|x64.Build.0 = Release|x64
 		{618E1388-D33B-4B6C-BA87-37FCDAB89DA8}.Release|x86.ActiveCfg = Release|Win32
 		{618E1388-D33B-4B6C-BA87-37FCDAB89DA8}.Release|x86.Build.0 = Release|Win32
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Debug|x64.ActiveCfg = Debug|x64
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Debug|x64.Build.0 = Debug|x64
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Debug|x86.ActiveCfg = Debug|Win32
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Debug|x86.Build.0 = Debug|Win32
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Release|x64.ActiveCfg = Release|x64
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Release|x64.Build.0 = Release|x64
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Release|x86.ActiveCfg = Release|Win32
+		{33A2C76A-B5DC-4D98-9ADC-0EA4AB76F645}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
