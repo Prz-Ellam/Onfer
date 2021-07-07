@@ -10,8 +10,8 @@ namespace Onfer {
 	public:
 		KeyStatus();
 		~KeyStatus();
-		bool isKeyPress();
-		bool isKeyUpdate();
+		bool isKeyPress() const;
+		bool isKeyUpdate() const;
 		void setKeyPress(bool keyPress);
 		void setKeyUpdate(bool keyUpdate);
 	};

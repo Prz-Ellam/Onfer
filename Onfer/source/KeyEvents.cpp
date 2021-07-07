@@ -28,9 +28,21 @@ namespace Onfer {
 
 	}
 
-	KeyStatus KeyEvents::getKeyStatus(KeyCode keyCode) {
+	KeyStatus KeyEvents::getKeyStatus(KeyCode keyCode) const {
 
 		return keys[(int)keyCode];
+
+	}
+
+	bool KeyEvents::isKeyPressed(KeyCode keyCode) const {
+
+		return keys[(int)keyCode].isKeyPress() && keys[(int)keyCode].isKeyUpdate();
+	
+	}
+
+	bool KeyEvents::isKeyRelease(KeyCode keyCode) const {
+
+		return !keys[(int)keyCode].isKeyPress() && keys[(int)keyCode].isKeyUpdate();
 
 	}
 
@@ -47,7 +59,7 @@ namespace Onfer {
 
 	}
 
-	KeyCode KeyEvents::getLastKey() {
+	KeyCode KeyEvents::getLastKey() const {
 
 		return lastKey;
 

@@ -5,6 +5,9 @@ namespace Onfer {
 
 	enum class KeyCode {
 
+		LeftButton = 1, RightButton = 2, MiddleButton = 4,
+		X1Button = 5, X2Button = 6,
+
 		KeyBackSpace = 8, KeyTab = 9, KeyClear = 12, KeyEnter = 13,
 		KeyShift = 16, KeyControl = 17, KeyEscape = 27, KeySpace = 32,
 
@@ -22,11 +25,12 @@ namespace Onfer {
 		KeyU = 85, KeyV = 86, KeyW = 87, KeyX = 88, KeyY = 89,
 		KeyZ = 90,
 
+		// Numpads
 		KeyNumpad0 = 96, KeyNumpad1 = 97, KeyNumpad2 = 98, KeyNumpad3 = 99,
 		KeyNumpad4 = 100, KeyNumpad5 = 101, KeyNumpad6 = 102, KeyNumpad7 = 103,
 		KeyNumpad8 = 104, KeyNumpad9 = 105,
 
-		// F
+		// Function Keys
 		KeyF1 = 112, KeyF2 = 113, KeyF3 = 114, KeyF4 = 115, KeyF5 = 116,
 		KeyF6 = 117, KeyF7 = 118, KeyF8 = 119, KeyF9 = 120, KeyF10 = 121,
 		KeyF11 = 122, KeyF12 = 123, KeyF13 = 124, KeyF14 = 125, KeyF15 = 126,

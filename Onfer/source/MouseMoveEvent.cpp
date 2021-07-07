@@ -3,7 +3,14 @@
 
 namespace Onfer {
 
-	MouseMoveEvent::MouseMoveEvent() : m_X(0.0), m_Y(0.0) {}
+	MouseMoveEvent::MouseMoveEvent() : m_X(0.0), m_Y(0.0) {
+	
+	}
+
+	MouseMoveEvent::MouseMoveEvent(double x, double y) : m_X(x), m_Y(y) {
+
+	}
+
 	MouseMoveEvent::~MouseMoveEvent() {}
 
 	void MouseMoveEvent::updateMousePosition(double x, double y) {
@@ -13,13 +20,13 @@ namespace Onfer {
 
 	}
 
-	double MouseMoveEvent::getXPosition() {
+	double MouseMoveEvent::getX() const {
 	
 		return m_X;
 
 	}
 
-	double MouseMoveEvent::getYPosition() {
+	double MouseMoveEvent::getY() const {
 	
 		return m_Y;
 
@@ -28,7 +35,7 @@ namespace Onfer {
 	std::string MouseMoveEvent::toString() {
 		
 		std::stringstream ss;
-		ss << "(" << m_X << ", " << m_Y << ")";
+		ss << "MouseMove: (" << m_X << ", " << m_Y << ")";
 		return ss.str();
 
 	}

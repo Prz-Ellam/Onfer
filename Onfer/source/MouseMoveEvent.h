@@ -10,13 +10,16 @@ namespace Onfer {
 		double m_X, m_Y;
 	public:
 		MouseMoveEvent();
+		MouseMoveEvent(double x, double y);
 		~MouseMoveEvent();
 
+		// Manager Event methods
 		void updateMousePosition(double x, double y);
-		double getXPosition();
-		double getYPosition();
-
 		std::string toString();
+
+		// Client methods
+		double getX() const;
+		double getY() const;
 
 	};
 

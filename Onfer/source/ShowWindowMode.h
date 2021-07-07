@@ -3,7 +3,7 @@
 
 namespace Onfer {
 
-	enum class OnferShowWindow {
+	enum class ShowWindowMode {
 		Hide = 0,
 		ShowNormal,
 		Normal = ShowNormal,

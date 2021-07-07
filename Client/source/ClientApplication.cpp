@@ -2,10 +2,9 @@
 
 int main(int argc, char** argv) {
 
-	Onfer::OnferWindow* window = new Onfer::OnferWindow();
-	window->show(Onfer::OnferShowWindow::ShowDefault);
-	window->run();
-
-	delete window;
+	Onfer::Log::trace("Estamos investigando: %d", 3);
+	Onfer::Application* application = new Onfer::Application();
+	application->run();
+	delete application;
 
 }

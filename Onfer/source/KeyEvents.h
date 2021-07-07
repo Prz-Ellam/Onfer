@@ -12,12 +12,18 @@ namespace Onfer {
 		KeyCode lastKey;
 	public:
 		KeyEvents();
-		~KeyEvents();
+		virtual ~KeyEvents();
+
+		// Manager Event methods
 		void disableAllKeys();
 		void updateKey(KeyCode keyCode, bool status);
-		KeyStatus getKeyStatus(KeyCode keyCode);
 		void restart();
-		KeyCode getLastKey();
+
+		// Client methods
+		KeyStatus getKeyStatus(KeyCode keyCode) const;
+		bool isKeyPressed(KeyCode keyCode) const;
+		bool isKeyRelease(KeyCode keyCode) const;
+		KeyCode getLastKey() const;
 	};
 
 }

@@ -1,7 +1,8 @@
-#ifndef _ONFER_H
-#define _ONFER_H
+#ifndef ONFER_H
+#define ONFER_H
 
 // Window registration
-#include "OnferWindow.h"
+#include "source/Application.h"
+#include "utils/Log.h"
 
 #endif

@@ -20,18 +20,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Onfer.h" />
+    <ClInclude Include="source\Application.h" />
     <ClInclude Include="source\KeyCode.h" />
+    <ClInclude Include="source\KeyCodeEvents.h" />
     <ClInclude Include="source\KeyEvents.h" />
     <ClInclude Include="source\KeyStatus.h" />
+    <ClInclude Include="source\MouseEvents.h" />
     <ClInclude Include="source\MouseMoveEvent.h" />
-    <ClInclude Include="source\OnferWindow.h" />
-    <ClInclude Include="source\OnferShowWindow.h" />
+    <ClInclude Include="source\Window.h" />
+    <ClInclude Include="source\ShowWindowMode.h" />
+    <ClInclude Include="source\WindowCloseEvent.h" />
+    <ClInclude Include="source\WindowEvents.h" />
+    <ClInclude Include="source\WindowResizeEvent.h" />
+    <ClInclude Include="utils\Log.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Application.cpp" />
     <ClCompile Include="source\KeyEvents.cpp" />
     <ClCompile Include="source\KeyStatus.cpp" />
     <ClCompile Include="source\MouseMoveEvent.cpp" />
-    <ClCompile Include="source\OnferWindow.cpp" />
+    <ClCompile Include="source\Window.cpp" />
+    <ClCompile Include="source\WindowCloseEvent.cpp" />
+    <ClCompile Include="source\WindowEvents.cpp" />
+    <ClCompile Include="source\WindowResizeEvent.cpp" />
+    <ClCompile Include="utils\Log.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

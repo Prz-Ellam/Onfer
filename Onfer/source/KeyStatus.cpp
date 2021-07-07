@@ -10,13 +10,13 @@ namespace Onfer {
 	
 	}
 
-	bool KeyStatus::isKeyPress() {
+	bool KeyStatus::isKeyPress() const {
 
 		return m_KeyPress;
 
 	}
 
-	bool KeyStatus::isKeyUpdate() {
+	bool KeyStatus::isKeyUpdate() const {
 
 		return m_KeyUpdate;
 	
