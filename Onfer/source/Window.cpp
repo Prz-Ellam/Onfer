@@ -1,54 +1,72 @@
 #include "Window.h"
-#include <stdio.h>
 
 namespace Onfer {
 
-	std::function<void(WindowResizeEvent)> Window::windowResizeEventHandler = nullptr;
-	std::function<void(WindowCloseEvent)> Window::windowCloseEventHandler = nullptr;
-	std::function<void(KeyEvents)> Window::keyEventsHandler = nullptr;
-	KeyEvents Window::keys = KeyEvents();
+	WindowResizeEventFn Window::windowResizeEventCallback = [](WindowResizeEvent e) {};
+	WindowCloseEventFn Window::windowCloseEventCallback = [](WindowCloseEvent e) {};
+	WindowMoveEventFn Window::windowMoveEventCallback = [](WindowMoveEvent e) {};
+	KeyEventsFn Window::keyEventsCallback = [](KeyEvents e) {};
 
-	WindowProperties::WindowProperties(uint32_t _width, uint32_t _height, const std::string& _title) {
-		width = _width;
-		height = _height;
-		title = _title;
-	}
-
-	WindowProperties::WindowProperties() {
-
-	}
-
-	Window::Window(WindowProperties _properties) : properties(_properties) {
+	Window::Window(uint32_t width, uint32_t height, const std::string& title) : m_Width(width), m_Height(height), m_Title(title) {
 
 		if (!init())
-			printf("ERROR\n");
+			Log::error("No se pudo iniciar la ventana");
+		m_Context = new OpenGLContext(hWnd);
+		m_Context->makeContextCurrent();
+
+	}
+
+	Window::Window() : m_Width(1280), m_Height(720), m_Title("Onfer Engine!") {
+
+		if (!init())
+			Log::error("No se pudo iniciar la ventana");
+		m_Context = new OpenGLContext(hWnd);
+		m_Context->makeContextCurrent();
 
 	}
 
 	Window::~Window() {
 
+		delete m_Context;
+
+	}
+
+	bool Window::registerWindowClass() {
+
+		WNDCLASSEX wndClass = {};
+		wndClass.cbSize = sizeof(WNDCLASSEX);
+		wndClass.style = CS_HREDRAW | CS_VREDRAW;
+		wndClass.lpfnWndProc = WindowProcedure;
+		wndClass.hInstance = GetModuleHandle(nullptr);
+		wndClass.hIcon = LoadIcon(wndClass.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+		wndClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
+		wndClass.hbrBackground = (HBRUSH)0;
+		wndClass.lpszClassName = "GameWindowClass";
+		wndClass.hIconSm = LoadIcon(wndClass.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+
+		return RegisterClassEx(&wndClass);
+
 	}
 
 	bool Window::init() {
 
-		if (!registerWindow()) {
-			printf("ERROR");
+		if (!registerWindowClass()) {
+			Log::error("No se pudo registrar la ventana");
 			return false;
 		}
 
 		hWnd = CreateWindowEx(NULL,
-			"OnferEngine",
-			properties.title.c_str(),
+			"GameWindowClass",
+			m_Title.c_str(),
 			WS_OVERLAPPEDWINDOW,
-			200,
-			200,
-			properties.width,
-			properties.height,
-			NULL,
-			NULL,
+			0,
+			0,
+			m_Width,
+			m_Height,
+			nullptr,
+			nullptr,
 			GetModuleHandle(nullptr),
-			NULL
-		);
+			nullptr);
 
 		return hWnd;
 
@@ -60,39 +78,19 @@ namespace Onfer {
 
 	}
 
-	bool Window::registerWindow() {
+	void Window::update() {
 
-		WNDCLASSEX wndClass = {};
-		wndClass.cbSize = sizeof(WNDCLASSEX);
-		wndClass.style = CS_HREDRAW | CS_VREDRAW;
-		wndClass.lpfnWndProc = WindowProcedure;
-		wndClass.cbClsExtra = 0;
-		wndClass.cbWndExtra = 0;
-		wndClass.hInstance = GetModuleHandle(nullptr);
-		wndClass.hIcon = LoadIcon(wndClass.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-		wndClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
-		wndClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
-		wndClass.lpszMenuName = nullptr;
-		wndClass.lpszClassName = "OnferEngine";
-		wndClass.hIconSm = LoadIcon(wndClass.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
-
-		return RegisterClassEx(&wndClass);
+		pollEvents();
+		m_Context->swapBuffers();
 
 	}
 
-	void Window::update() {
+	void Window::pollEvents() {
 
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) {
+		MSG msg = {};
+		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) != 0) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-			keys.restart();
-			//printf("%d\n", msg.message);
-
-
-		}
-		else {
-			// Logic here
-
 		}
 
 	}
@@ -103,80 +101,68 @@ namespace Onfer {
 
 	}
 
-	unsigned int Window::getWidth() const {
+	uint32_t Window::getWidth() const {
 
-		return properties.width;
-
-	}
-
-	unsigned int Window::getHeight() const {
-
-		return properties.height;
+		return m_Width;
 
 	}
 
-	void Window::windowResizeEventDispatcher(std::function<void(WindowResizeEvent)> handler) {
+	uint32_t Window::getHeight() const {
 
-		windowResizeEventHandler = handler;
-
-	}
-
-	void Window::windowCloseEventDispatcher(std::function<void(WindowCloseEvent)> handler) {
-
-		windowCloseEventHandler = handler;
+		return m_Height;
 
 	}
 
-	void Window::keyEventsDispatcher(std::function<void(KeyEvents)> handler) {
+	void Window::setWindowResizeEventCallback(WindowResizeEventFn callback) {
 
-		keyEventsHandler = handler;
+		windowResizeEventCallback = callback;
+
+	}
+
+	void Window::setWindowMoveEventCallback(WindowMoveEventFn callback) {
+
+		windowMoveEventCallback = callback;
+
+	}
+
+	void Window::setWindowCloseEventCallback(WindowCloseEventFn callback) {
+
+		windowCloseEventCallback = callback;
+
+	}
+
+	void Window::setKeyEventsCallback(KeyEventsFn callback) {
+
+		keyEventsCallback = callback;
 
 	}
 
 	LRESULT CALLBACK Window::WindowProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 		switch (uMsg) {
-			case WM_SIZE: {
-
-				WindowResizeEvent e = WindowResizeEvent(LOWORD(lParam), HIWORD(lParam));
-				windowResizeEventHandler(e);
-
-				break;
-			}
-			case WM_KEYUP:
+			/*case WM_KEYUP:
 			case WM_KEYDOWN: {
 
-				bool isPressed = (uMsg == WM_KEYDOWN);
+				bool status = (uMsg == WM_KEYDOWN) ? 1 : 0;
 
-				KeyCode code = (KeyCode)wParam;
-				switch (code) {
-					case KeyCode::KeyW:
-						keys.updateKey(KeyCode::KeyW, isPressed);
-						break;
-					case KeyCode::KeyA:
-						keys.updateKey(KeyCode::KeyA, isPressed);
-						break;
-				}
-				keyEventsHandler(keys);
+				static KeyEvents e;
+				e.updateKey((KeyCode)wParam, status);
 
+				keyEventsCallback(e);
 				break;
-			}
-			case WM_MOVE: {
-
+			}*/
+			case WM_SIZE:
+				windowResizeEventCallback(WindowResizeEvent(LOWORD(lParam), HIWORD(lParam)));
 				break;
-			}
-			case WM_CLOSE: {
-				
-				WindowCloseEvent e = WindowCloseEvent();
-				windowCloseEventHandler(e);
-
+			case WM_MOVE:
+				windowMoveEventCallback(WindowMoveEvent(LOWORD(lParam), HIWORD(lParam)));
 				break;
-			}
-			default:
-				return DefWindowProc(hWnd, uMsg, wParam, lParam);
+			case WM_DESTROY:
+				windowCloseEventCallback(WindowCloseEvent());
+				break;
 		}
 
-		return FALSE;
+		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	}
 
 }

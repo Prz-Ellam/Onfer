@@ -20,7 +20,32 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Onfer.h" />
-    <ClInclude Include="source\Application.h" />
+    <ClInclude Include="OpenGL\OpenGL.h" />
+    <ClInclude Include="Renderer\BatchRender.h" />
+    <ClInclude Include="Renderer\BufferLayout.h" />
+    <ClInclude Include="Renderer\Camera.h" />
+    <ClInclude Include="Renderer\IndexBufferFactory.h" />
+    <ClInclude Include="Renderer\Renderer2D\Camera2D.h" />
+    <ClInclude Include="Renderer\Context.h" />
+    <ClInclude Include="Renderer\IndexBuffer.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLIndexBuffer.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLRenderer.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="Renderer\OpenGL\OpenGLVertexBuffer.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Renderer\Renderer2D\Quad.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\Renderer3D\Camera3D.h" />
+    <ClInclude Include="Renderer\Shader.h" />
+    <ClInclude Include="Renderer\Renderer2D\Sprite.h" />
+    <ClInclude Include="Renderer\Texture.h" />
+    <ClInclude Include="Renderer\VertexArray.h" />
+    <ClInclude Include="Renderer\VertexBuffer.h" />
+    <ClInclude Include="Renderer\VertexBufferFactory.h" />
+    <ClInclude Include="source\Scene.h" />
     <ClInclude Include="source\KeyCode.h" />
     <ClInclude Include="source\KeyCodeEvents.h" />
     <ClInclude Include="source\KeyEvents.h" />
@@ -31,19 +56,52 @@
     <ClInclude Include="source\ShowWindowMode.h" />
     <ClInclude Include="source\WindowCloseEvent.h" />
     <ClInclude Include="source\WindowEvents.h" />
+    <ClInclude Include="source\WindowMoveEvent.h" />
     <ClInclude Include="source\WindowResizeEvent.h" />
+    <ClInclude Include="utils\Image.h" />
     <ClInclude Include="utils\Log.h" />
+    <ClInclude Include="utils\mat4.h" />
+    <ClInclude Include="utils\Math.h" />
+    <ClInclude Include="utils\Timer.h" />
+    <ClInclude Include="utils\vec2.h" />
+    <ClInclude Include="utils\vec3.h" />
+    <ClInclude Include="utils\vec4.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\Application.cpp" />
+    <ClCompile Include="OpenGL\OpenGL.cpp" />
+    <ClCompile Include="Renderer\BatchRender.cpp" />
+    <ClCompile Include="Renderer\BufferLayout.cpp" />
+    <ClCompile Include="Renderer\IndexBufferFactory.cpp" />
+    <ClCompile Include="Renderer\Renderer2D\Camera2D.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLRenderer.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="Renderer\OpenGL\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Renderer\Renderer2D\Quad.cpp" />
+    <ClCompile Include="Renderer\Renderer2D\Sprite.cpp" />
+    <ClCompile Include="Renderer\Renderer3D\Camera3D.cpp" />
+    <ClCompile Include="Renderer\VertexBufferFactory.cpp" />
+    <ClCompile Include="source\Scene.cpp" />
     <ClCompile Include="source\KeyEvents.cpp" />
     <ClCompile Include="source\KeyStatus.cpp" />
     <ClCompile Include="source\MouseMoveEvent.cpp" />
     <ClCompile Include="source\Window.cpp" />
     <ClCompile Include="source\WindowCloseEvent.cpp" />
     <ClCompile Include="source\WindowEvents.cpp" />
+    <ClCompile Include="source\WindowMoveEvent.cpp" />
     <ClCompile Include="source\WindowResizeEvent.cpp" />
+    <ClCompile Include="utils\Image.cpp" />
     <ClCompile Include="utils\Log.cpp" />
+    <ClCompile Include="utils\mat4.cpp" />
+    <ClCompile Include="utils\Math.cpp" />
+    <ClCompile Include="utils\Timer.cpp" />
+    <ClCompile Include="utils\vec2.cpp" />
+    <ClCompile Include="utils\vec3.cpp" />
+    <ClCompile Include="utils\vec4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

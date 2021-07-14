@@ -2,7 +2,7 @@
 #define ONFER_H
 
 // Window registration
-#include "source/Application.h"
+#include "source/Scene.h"
 #include "utils/Log.h"
 
 #endif

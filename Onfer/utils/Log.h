@@ -53,7 +53,7 @@ namespace Onfer {
 	template <typename... Args>
 	void Log::debug(const std::string& message, Args... args) {
 
-		printf("\x1B[32m[Debug]\033[0m\t\t");
+		printf("\x1B[36m[Debug]\033[0m\t\t");
 		printf(message.c_str(), args...);
 		printf("\n");
 
@@ -71,7 +71,7 @@ namespace Onfer {
 	template <typename... Args>
 	void Log::warn(const std::string& message, Args... args) {
 
-		printf("\x1B[32m[Warn]\033[0m\t\t");
+		printf("\x1B[93m[Warn]\033[0m\t\t");
 		printf(message.c_str(), args...);
 		printf("\n");
 
@@ -80,7 +80,7 @@ namespace Onfer {
 	template <typename... Args>
 	void Log::error(const std::string& message, Args... args) {
 
-		printf("\x1B[32m[Error]\033[0m\t\t");
+		printf("\x1B[31m[Error]\033[0m\t\t");
 		printf(message.c_str(), args...);
 		printf("\n");
 
@@ -89,7 +89,7 @@ namespace Onfer {
 	template <typename... Args>
 	void Log::fatal(const std::string& message, Args... args) {
 
-		printf("\x1B[32m[Fatal]\033[0m\t\t");
+		printf("\x1B[31m[Fatal]\033[0m\t\t");
 		printf(message.c_str(), args...);
 		printf("\n");
 

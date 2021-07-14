@@ -1,5 +1,5 @@
-#ifndef KEY_STATUS_H
-#define KEY_STATUS_H
+#ifndef ONFER_KEY_STATUS_H
+#define ONFER_KEY_STATUS_H
 
 namespace Onfer {
 

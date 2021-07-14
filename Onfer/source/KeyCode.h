@@ -1,5 +1,5 @@
-#ifndef KEY_CODE_H
-#define KEY_CODE_H
+#ifndef ONFER_KEY_CODE_H
+#define ONFER_KEY_CODE_H
 
 namespace Onfer {
 

@@ -1,5 +1,5 @@
-#ifndef ONF_WINDOW_H
-#define ONF_WINDOW_H
+#ifndef ONFER_WINDOW_H
+#define ONFER_WINDOW_H
 
 #include <Windows.h>
 #include <string>
@@ -10,40 +10,49 @@
 #include "WindowResizeEvent.h"
 #include "WindowCloseEvent.h"
 #include "WindowEvents.h"
+#include "WindowMoveEvent.h"
+#include "../utils/Log.h"
+#include "../Renderer/OpenGL/OpenGLContext.h"
+#include "../Renderer/Context.h"
 
 namespace Onfer {
 
-	struct WindowProperties {
-		WindowProperties(uint32_t _width, uint32_t _height, const std::string& _title);
-		WindowProperties();
-		std::string title = "Onfer Engine!";
-		uint32_t width = 1280, height = 720;
-	};
+	using WindowResizeEventFn = std::function<void(WindowResizeEvent)>;
+	using WindowCloseEventFn = std::function<void(WindowCloseEvent)>;
+	using WindowMoveEventFn = std::function<void(WindowMoveEvent)>;
+	using KeyEventsFn = std::function<void(KeyEvents)>;
 
 	class Window {
 	private:
-		WindowProperties properties;
 		HWND hWnd;
-		MSG msg;
-		static KeyEvents keys;
-		static WindowEvents window;
-		bool registerWindow();
+		Context* m_Context;
+		uint32_t m_Width, m_Height;
+		std::string m_Title;
+
+		static WindowResizeEventFn windowResizeEventCallback;
+		static WindowCloseEventFn windowCloseEventCallback;
+		static WindowMoveEventFn windowMoveEventCallback;
+		static KeyEventsFn keyEventsCallback;
+
+		bool registerWindowClass();
 		bool init();
-		static std::function<void(WindowResizeEvent)> windowResizeEventHandler;
-		static std::function<void(WindowCloseEvent)> windowCloseEventHandler;
-		static std::function<void(KeyEvents)> keyEventsHandler;
+		void pollEvents();
+		void close();
 	public:
-		Window(WindowProperties properties = WindowProperties());
+		Window(uint32_t width, uint32_t height, const std::string& title);
+		Window();
 		virtual ~Window();
+
 		void show(ShowWindowMode sw);
 		void update();
-		void close();
-		unsigned int getWidth() const;
-		unsigned int getHeight() const;
 
-		void windowResizeEventDispatcher(std::function<void(WindowResizeEvent)> handler);
-		void windowCloseEventDispatcher(std::function<void(WindowCloseEvent)> handler);
-		void keyEventsDispatcher(std::function<void(KeyEvents)> handler);
+		uint32_t getWidth() const;
+		uint32_t getHeight() const;
+
+		void setWindowResizeEventCallback(WindowResizeEventFn callback);
+		void setWindowMoveEventCallback(WindowMoveEventFn callback);
+		void setWindowCloseEventCallback(WindowCloseEventFn callback);
+		void setKeyEventsCallback(KeyEventsFn callback);
 
 		static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
